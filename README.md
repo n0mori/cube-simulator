@@ -11,3 +11,4 @@ Keyboard actions:
 - l: Performs a turn in the L face 90 degrees clockwise
 - d: Performs a turn in the D face 90 degrees clockwise
 - b: Performs a turn in the B face 90 degrees clockwise
+- z: Toggles the solving function
