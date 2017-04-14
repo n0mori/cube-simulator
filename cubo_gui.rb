@@ -1,11 +1,11 @@
 require_relative 'cubo'
 
-class CuboGUI < Gosu::Window
-  def initialize(cubo)
+class CubeGUI < Gosu::Window
+  def initialize(cube)
     super 800, 600
-    @cubo = cubo
+    @cube = cube
     self.caption = "Cube Simulator"
-    #puts @cubo
+    #puts @cube
     @apertados = {'r' => 0, 'u' => 0, 'f' => 0, 'l' => 0, 'b' => 0, 'd' => 0}
     @cooldown = 10
     @frame_count = 0
@@ -15,51 +15,51 @@ class CuboGUI < Gosu::Window
   end
 
   def update
-    @cubo.speffz
-    if @solving && @cubo.stack.length == 0
-      if @cubo.solve_next_edge
-        @cubo.solve_next_corner
+    @cube.speffz
+    if @solving && @cube.stack.length == 0
+      if @cube.solve_next_edge
+        @cube.solve_next_corner
       end
     end
     @frame_count += 1
     if @frame_count % 2 == 0
-      if @cubo.stack.length > 0
+      if @cube.stack.length > 0
         @moves += 1
-        @cubo.move
+        @cube.move
       end
     end
     if @apertados['r'] == @cooldown
-      @cubo.r
+      @cube.r
     end
     if @apertados['r'] > 0
       @apertados['r'] -= 1
     end
     if @apertados['u'] == @cooldown
-      @cubo.u
+      @cube.u
     end
     if @apertados['u'] > 0
       @apertados['u'] -= 1
     end
     if @apertados['f'] == @cooldown
-      @cubo.f
+      @cube.f
     end
     if @apertados['f'] > 0
       @apertados['f'] -= 1
     end
     if @apertados['l'] == @cooldown
-      @cubo.l
+      @cube.l
     end
     if @apertados['l'] > 0
       @apertados['l'] -= 1
     end
     if @apertados['b'] == @cooldown
-      @cubo.b
+      @cube.b
     end
     if @apertados['b'] > 0
       @apertados['b'] -= 1
     end
     if @apertados['d'] == @cooldown
-      @cubo.d
+      @cube.d
     end
     if @apertados['d'] > 0
       @apertados['d'] -= 1
@@ -67,12 +67,12 @@ class CuboGUI < Gosu::Window
   end
 
   def draw
-    draw_cubo
+    draw_cube
     @texto.draw("Moves: #{@moves}", 5, 30, 1)
   end
 
-  def draw_cubo
-    @cubo.cubo.each do |chave, valores|
+  def draw_cube
+    @cube.cube.each do |chave, valores|
       offset_x = 0
       offset_y = 0
       if chave == 'l'
@@ -129,13 +129,13 @@ class CuboGUI < Gosu::Window
         @apertados['d'] = @cooldown
       end
     when Gosu::KB_M
-      @cubo.m
+      @cube.m
     when Gosu::KB_S
-      @cubo.embaralha
+      @cube.embaralha
     when Gosu::KB_T
-      @cubo.t
+      @cube.t
     when Gosu::KB_Y
-      @cubo.y
+      @cube.y
     when Gosu::KB_Z
       unless @solving
         @moves = 0
@@ -146,5 +146,5 @@ class CuboGUI < Gosu::Window
 end
 
 
-cubo = Cubo.new
-CuboGUI.new(cubo).show
+cube = Cube.new
+CubeGUI.new(cube).show

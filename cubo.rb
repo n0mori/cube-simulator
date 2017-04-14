@@ -1,9 +1,9 @@
 require 'gosu'
 
-class Cubo
+class Cube
   attr_reader :stack
   def initialize
-    @cubo = {}
+    @cube = {}
     lados = ['f', 'r', 'u', 'l', 'd', 'b']
     @green = Gosu::Color.argb(0xff_00ff00)
     @red = Gosu::Color.argb(0xff_ff0000)
@@ -17,7 +17,7 @@ class Cubo
       for j in 0..8 do
         arr << cores[i]
       end
-      @cubo[lados[i]] = arr
+      @cube[lados[i]] = arr
     end
     @stack = []
     @corners = {}
@@ -81,41 +81,41 @@ class Cubo
     end
   end
 
-  def cubo
-    @cubo
+  def cube
+    @cube
   end
 
   def to_s
-    scr = "   #{@cubo['u'][0]}#{@cubo['u'][1]}#{@cubo['u'][2]}\n"
-    scr << "   #{@cubo['u'][3]}#{@cubo['u'][4]}#{@cubo['u'][5]}\n"
-    scr << "   #{@cubo['u'][6]}#{@cubo['u'][7]}#{@cubo['u'][8]}\n"
-    scr << "#{@cubo['l'][0]}#{@cubo['l'][1]}#{@cubo['l'][2]}"
-    scr << "#{@cubo['f'][0]}#{@cubo['f'][1]}#{@cubo['f'][2]}"
-    scr << "#{@cubo['r'][0]}#{@cubo['r'][1]}#{@cubo['r'][2]}"
-    scr << "#{@cubo['b'][0]}#{@cubo['b'][1]}#{@cubo['b'][2]}\n"
-    scr << "#{@cubo['l'][3]}#{@cubo['l'][4]}#{@cubo['l'][5]}"
-    scr << "#{@cubo['f'][3]}#{@cubo['f'][4]}#{@cubo['f'][5]}"
-    scr << "#{@cubo['r'][3]}#{@cubo['r'][4]}#{@cubo['r'][5]}"
-    scr << "#{@cubo['b'][3]}#{@cubo['b'][4]}#{@cubo['b'][5]}\n"
-    scr << "#{@cubo['l'][6]}#{@cubo['l'][7]}#{@cubo['l'][8]}"
-    scr << "#{@cubo['f'][6]}#{@cubo['f'][7]}#{@cubo['f'][8]}"
-    scr << "#{@cubo['r'][6]}#{@cubo['r'][7]}#{@cubo['r'][8]}"
-    scr << "#{@cubo['b'][6]}#{@cubo['b'][7]}#{@cubo['b'][8]}\n"
-    scr <<  "   #{@cubo['d'][0]}#{@cubo['d'][1]}#{@cubo['d'][2]}\n"
-    scr << "   #{@cubo['d'][3]}#{@cubo['d'][4]}#{@cubo['d'][5]}\n"
-    scr << "   #{@cubo['d'][6]}#{@cubo['d'][7]}#{@cubo['d'][8]}\n"
+    scr = "   #{@cube['u'][0]}#{@cube['u'][1]}#{@cube['u'][2]}\n"
+    scr << "   #{@cube['u'][3]}#{@cube['u'][4]}#{@cube['u'][5]}\n"
+    scr << "   #{@cube['u'][6]}#{@cube['u'][7]}#{@cube['u'][8]}\n"
+    scr << "#{@cube['l'][0]}#{@cube['l'][1]}#{@cube['l'][2]}"
+    scr << "#{@cube['f'][0]}#{@cube['f'][1]}#{@cube['f'][2]}"
+    scr << "#{@cube['r'][0]}#{@cube['r'][1]}#{@cube['r'][2]}"
+    scr << "#{@cube['b'][0]}#{@cube['b'][1]}#{@cube['b'][2]}\n"
+    scr << "#{@cube['l'][3]}#{@cube['l'][4]}#{@cube['l'][5]}"
+    scr << "#{@cube['f'][3]}#{@cube['f'][4]}#{@cube['f'][5]}"
+    scr << "#{@cube['r'][3]}#{@cube['r'][4]}#{@cube['r'][5]}"
+    scr << "#{@cube['b'][3]}#{@cube['b'][4]}#{@cube['b'][5]}\n"
+    scr << "#{@cube['l'][6]}#{@cube['l'][7]}#{@cube['l'][8]}"
+    scr << "#{@cube['f'][6]}#{@cube['f'][7]}#{@cube['f'][8]}"
+    scr << "#{@cube['r'][6]}#{@cube['r'][7]}#{@cube['r'][8]}"
+    scr << "#{@cube['b'][6]}#{@cube['b'][7]}#{@cube['b'][8]}\n"
+    scr <<  "   #{@cube['d'][0]}#{@cube['d'][1]}#{@cube['d'][2]}\n"
+    scr << "   #{@cube['d'][3]}#{@cube['d'][4]}#{@cube['d'][5]}\n"
+    scr << "   #{@cube['d'][6]}#{@cube['d'][7]}#{@cube['d'][8]}\n"
   end
 
   def inverte face, n
-  #  aux = @cubo[face][0]
-  #  @cubo[face][0] = @cubo[face][2]
-  #  @cubo[face][2] = aux
-  #  aux = @cubo[face][3]
-  #  @cubo[face][3] = @cubo[face][5]
-  #  @cubo[face][5] = aux
-  #  aux = @cubo[face][6]
-  #  @cubo[face][6] = @cubo[face][8]
-  #  @cubo[face][8] = aux
+  #  aux = @cube[face][0]
+  #  @cube[face][0] = @cube[face][2]
+  #  @cube[face][2] = aux
+  #  aux = @cube[face][3]
+  #  @cube[face][3] = @cube[face][5]
+  #  @cube[face][5] = aux
+  #  aux = @cube[face][6]
+  #  @cube[face][6] = @cube[face][8]
+  #  @cube[face][8] = aux
     n.times {
       turn_edges face
       turn_corners face
@@ -231,57 +231,57 @@ class Cubo
   end
 
   def turn_edges side
-    aux = @cubo[side][1]
-    @cubo[side][1] = @cubo[side][3]
-    @cubo[side][3] = @cubo[side][7]
-    @cubo[side][7] = @cubo[side][5]
-    @cubo[side][5] = aux
+    aux = @cube[side][1]
+    @cube[side][1] = @cube[side][3]
+    @cube[side][3] = @cube[side][7]
+    @cube[side][7] = @cube[side][5]
+    @cube[side][5] = aux
   end
 
   def turn_corners side
-    aux = @cubo[side][0]
-    @cubo[side][0] = @cubo[side][6]
-    @cubo[side][6] = @cubo[side][8]
-    @cubo[side][8] = @cubo[side][2]
-    @cubo[side][2] = aux
+    aux = @cube[side][0]
+    @cube[side][0] = @cube[side][6]
+    @cube[side][6] = @cube[side][8]
+    @cube[side][8] = @cube[side][2]
+    @cube[side][2] = aux
   end
 
   def troca_faces faces, pecas
     #inverte faces[2]
-    aux = [@cubo[faces[0]][pecas[0]], @cubo[faces[0]][pecas[1]], @cubo[faces[0]][pecas[2]]]
+    aux = [@cube[faces[0]][pecas[0]], @cube[faces[0]][pecas[1]], @cube[faces[0]][pecas[2]]]
     for j in 0..2
-      @cubo[faces[0]][pecas[j]] = @cubo[faces[3]][pecas[j]]
+      @cube[faces[0]][pecas[j]] = @cube[faces[3]][pecas[j]]
     end
     for j in 0..2
-      @cubo[faces[3]][pecas[j]] = @cubo[faces[2]][pecas[j]]
+      @cube[faces[3]][pecas[j]] = @cube[faces[2]][pecas[j]]
     end
     for j in 0..2
-      @cubo[faces[2]][pecas[j]] = @cubo[faces[1]][pecas[j]]
+      @cube[faces[2]][pecas[j]] = @cube[faces[1]][pecas[j]]
     end
     for j in 0..2
-      @cubo[faces[1]][pecas[j]] = aux[j]
+      @cube[faces[1]][pecas[j]] = aux[j]
     end
     #inverte faces[2]
   end
 
   def m
-    aux = @cubo['u'][4]
-    @cubo['u'][4] = @cubo['b'][4]
-    @cubo['b'][4] = @cubo['d'][4]
-    @cubo['d'][4] = @cubo['f'][4]
-    @cubo['f'][4] = aux
+    aux = @cube['u'][4]
+    @cube['u'][4] = @cube['b'][4]
+    @cube['b'][4] = @cube['d'][4]
+    @cube['d'][4] = @cube['f'][4]
+    @cube['f'][4] = aux
 
-    aux = @cubo['u'][1]
-    @cubo['u'][1] = @cubo['b'][7]
-    @cubo['b'][7] = @cubo['d'][1]
-    @cubo['d'][1] = @cubo['f'][1]
-    @cubo['f'][1] = aux
+    aux = @cube['u'][1]
+    @cube['u'][1] = @cube['b'][7]
+    @cube['b'][7] = @cube['d'][1]
+    @cube['d'][1] = @cube['f'][1]
+    @cube['f'][1] = aux
 
-    aux = @cubo['u'][7]
-    @cubo['u'][7] = @cubo['b'][1]
-    @cubo['b'][1] = @cubo['d'][7]
-    @cubo['d'][7] = @cubo['f'][7]
-    @cubo['f'][7] = aux
+    aux = @cube['u'][7]
+    @cube['u'][7] = @cube['b'][1]
+    @cube['b'][1] = @cube['d'][7]
+    @cube['d'][7] = @cube['f'][7]
+    @cube['f'][7] = aux
   end
 
   def m_linha
@@ -298,64 +298,64 @@ class Cubo
 
   def speffz
     #u face
-    @corners[:a] = @cubo['u'][0]
-    @edges[:a] = @cubo['u'][1]
-    @corners[:b] = @cubo['u'][2]
-    @edges[:b] = @cubo['u'][5]
-    @corners[:c] = @cubo['u'][8]
-    @edges[:c] = @cubo['u'][7]
-    @corners[:d] = @cubo['u'][6]
-    @edges[:d] = @cubo['u'][3]
+    @corners[:a] = @cube['u'][0]
+    @edges[:a] = @cube['u'][1]
+    @corners[:b] = @cube['u'][2]
+    @edges[:b] = @cube['u'][5]
+    @corners[:c] = @cube['u'][8]
+    @edges[:c] = @cube['u'][7]
+    @corners[:d] = @cube['u'][6]
+    @edges[:d] = @cube['u'][3]
 
     #l face
-    @corners[:e] = @cubo['l'][0]
-    @edges[:e] = @cubo['l'][1]
-    @corners[:f] = @cubo['l'][2]
-    @edges[:f] = @cubo['l'][5]
-    @corners[:g] = @cubo['l'][8]
-    @edges[:g] = @cubo['l'][7]
-    @corners[:h] = @cubo['l'][6]
-    @edges[:h] = @cubo['l'][3]
+    @corners[:e] = @cube['l'][0]
+    @edges[:e] = @cube['l'][1]
+    @corners[:f] = @cube['l'][2]
+    @edges[:f] = @cube['l'][5]
+    @corners[:g] = @cube['l'][8]
+    @edges[:g] = @cube['l'][7]
+    @corners[:h] = @cube['l'][6]
+    @edges[:h] = @cube['l'][3]
 
     #f face
-    @corners[:i] = @cubo['f'][0]
-    @edges[:i] = @cubo['f'][1]
-    @corners[:j] = @cubo['f'][2]
-    @edges[:j] = @cubo['f'][5]
-    @corners[:k] = @cubo['f'][8]
-    @edges[:k] = @cubo['f'][7]
-    @corners[:l] = @cubo['f'][6]
-    @edges[:l] = @cubo['f'][3]
+    @corners[:i] = @cube['f'][0]
+    @edges[:i] = @cube['f'][1]
+    @corners[:j] = @cube['f'][2]
+    @edges[:j] = @cube['f'][5]
+    @corners[:k] = @cube['f'][8]
+    @edges[:k] = @cube['f'][7]
+    @corners[:l] = @cube['f'][6]
+    @edges[:l] = @cube['f'][3]
 
     #r face
-    @corners[:m] = @cubo['r'][0]
-    @edges[:m] = @cubo['r'][1]
-    @corners[:n] = @cubo['r'][2]
-    @edges[:n] = @cubo['r'][5]
-    @corners[:o] = @cubo['r'][8]
-    @edges[:o] = @cubo['r'][7]
-    @corners[:p] = @cubo['r'][6]
-    @edges[:p] = @cubo['r'][3]
+    @corners[:m] = @cube['r'][0]
+    @edges[:m] = @cube['r'][1]
+    @corners[:n] = @cube['r'][2]
+    @edges[:n] = @cube['r'][5]
+    @corners[:o] = @cube['r'][8]
+    @edges[:o] = @cube['r'][7]
+    @corners[:p] = @cube['r'][6]
+    @edges[:p] = @cube['r'][3]
 
     #b face
-    @corners[:q] = @cubo['b'][0]
-    @edges[:q] = @cubo['b'][1]
-    @corners[:r] = @cubo['b'][2]
-    @edges[:r] = @cubo['b'][5]
-    @corners[:s] = @cubo['b'][8]
-    @edges[:s] = @cubo['b'][7]
-    @corners[:t] = @cubo['b'][6]
-    @edges[:t] = @cubo['b'][3]
+    @corners[:q] = @cube['b'][0]
+    @edges[:q] = @cube['b'][1]
+    @corners[:r] = @cube['b'][2]
+    @edges[:r] = @cube['b'][5]
+    @corners[:s] = @cube['b'][8]
+    @edges[:s] = @cube['b'][7]
+    @corners[:t] = @cube['b'][6]
+    @edges[:t] = @cube['b'][3]
 
     #d face
-    @corners[:u] = @cubo['d'][0]
-    @edges[:u] = @cubo['d'][1]
-    @corners[:v] = @cubo['d'][2]
-    @edges[:v] = @cubo['d'][5]
-    @corners[:w] = @cubo['d'][8]
-    @edges[:w] = @cubo['d'][7]
-    @corners[:x] = @cubo['d'][6]
-    @edges[:x] = @cubo['d'][3]
+    @corners[:u] = @cube['d'][0]
+    @edges[:u] = @cube['d'][1]
+    @corners[:v] = @cube['d'][2]
+    @edges[:v] = @cube['d'][5]
+    @corners[:w] = @cube['d'][8]
+    @edges[:w] = @cube['d'][7]
+    @corners[:x] = @cube['d'][6]
+    @edges[:x] = @cube['d'][3]
   end
 
   #TODO: remake the scramble method
@@ -480,7 +480,7 @@ class Cubo
 
   def solve_edges
     20.times { solve_next }
-    if @cubo['f'][4] == @blue then push "D' L2 D M2 D' L2 D" end
+    if @cube['f'][4] == @blue then push "D' L2 D M2 D' L2 D" end
   end
 
   def find_unsolved_edge
@@ -529,7 +529,7 @@ class Cubo
       when @green
         case @edges[vizinho]
         when @white
-          if @cubo['f'][4] == @green
+          if @cube['f'][4] == @green
             push "D M' U R2 U' M U R2 U' D' M2"
           else
             push "M2 D U R2 U' M' U R2 U' M D'"
@@ -569,7 +569,7 @@ class Cubo
         when @red
           push "U R' U' M2 U R U'"
         when @yellow
-          if @cubo['f'][4] == @green
+          if @cube['f'][4] == @green
             push "M2 D U R2 U' M' U R2 U' M D'"
           else
             push "D M' U R2 U' M U R2 U' D' M2"
@@ -584,7 +584,7 @@ class Cubo
         when @red
           push "R' U R U' M2 U R' U' R"
         when @green
-          if @cubo['f'][4] == @green
+          if @cube['f'][4] == @green
             push "U2 M' U2 M'"
           else
             push "M U2 M U2"
@@ -598,7 +598,7 @@ class Cubo
         when @red
           push "U R2 U' M2 U R2 U'"
         when @blue
-          if @cubo['f'][4] == @green
+          if @cube['f'][4] == @green
             push "M U2 M U2"
           else
             push "U2 M' U2 M'"
