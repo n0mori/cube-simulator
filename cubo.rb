@@ -359,45 +359,24 @@ class Cube
   end
 
   #TODO: remake the scramble method
-  def embaralha
+  def scramble
     scramble = ""
-    last = ""
-    embaralhado = {f:  true, r: true, u: true, b: true, l:true, d: true}
-    i = 0
-    while i < 30
-      sides = [:f, :r, :u, :b, :l, ]
-      current = sides.shuffle.first
-      if current == last
-        loop
-      elsif embaralhado[current] != true
-        loop
-      else
-        attribute = [" ", "' ", "2 "].shuffle.first
-        case current
-        when :f, :b
-          move = "#{current.upcase}#{attribute}"
-          scramble << move
-          embaralhado.each { |k, v| embaralhado[k] = true }
-          embaralhado[:f] = false
-          embaralhado[:b] = false
-          i += 1
-        when :r, :l
-          move = "#{current.upcase}#{attribute}"
-          scramble << move
-          embaralhado.each { |k, v| embaralhado[k] = true }
-          embaralhado[:r] = false
-          embaralhado[:l] = false
-          i += 1
-        when :u,
-          move = "#{current.upcase}#{attribute}"
-          scramble << move
-          embaralhado.each { |k, v| embaralhado[k] = true }
-          embaralhado[:u] = false
-          embaralhado[:d] = false
-          i += 1
-        end
+    before = ""
+    moves = ["R", "U", "F", "L", "B", "D"]
+    attributes = ["' ", "2 ", " "]
+    opposite = {"R" => "L", "L" => "R", "U" => "D", "D" => "U", "F" => "B", "B" => "F"}
+    30.times {
+      chosen = ""
+      loop do
+        chosen = moves.shuffle.first
+        break if chosen != before && chosen != opposite[before]
       end
-    end
+      before = chosen
+      chosen_attribute = attributes.shuffle.first
+      scramble << chosen << chosen_attribute
+    }
+    puts scramble
+    #self.push "L2 B2 D F2 D R2 B2 F2 D B2 L2 R' D2 F D U B D' L2 B2" #scramble
     self.push scramble
     while @stack.size > 0
       self.move
@@ -478,6 +457,10 @@ class Cube
     true
   end
 
+  def edge_buffer_in_place?
+    @edges[:u] == @yellow && @edges[:k] == @green || @edges[:u] == @green && @edges[:k] == @yellow
+  end
+
   def solve_edges
     20.times { solve_next }
     if @cube['f'][4] == @blue then push "D' L2 D M2 D' L2 D" end
@@ -513,7 +496,7 @@ class Cube
 
   def solve_next_edge
     unless edges_solved? || pos_paridade?
-      if edge_solved? :u
+      if edge_buffer_in_place?
         if paridade?
           push "D' L2 D M2 D' L2 D"
           return true

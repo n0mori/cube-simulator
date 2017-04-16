@@ -131,7 +131,7 @@ class CubeGUI < Gosu::Window
     when Gosu::KB_M
       @cube.m
     when Gosu::KB_S
-      @cube.embaralha
+      @cube.scramble
     when Gosu::KB_T
       @cube.t
     when Gosu::KB_Y
