@@ -3,6 +3,8 @@ Rubik's cube simulator with an included solver
 
 To run: ``` ruby cubo_gui.rb ```
 
+Required gems: gosu
+
 ## Keyboard actions:
 | key | action |
 | --- | --- |
